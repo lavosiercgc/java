@@ -138,12 +138,38 @@ public class FrmCalculadora extends JFrame {
 		btnMaiMenos.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 
 		JButton btnRaiz = new JButton("V'''");
+		btnRaiz.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Double valor1 = Double.valueOf(textTela.getText());
+				Math.sqrt(valor1);
+				String raiz=String.valueOf(Math.sqrt(valor1));
+				textTela.setText(raiz);
+				textExpessao.setText("Sqrt("+valor1+")");
+				
+				
+			}
+		});
 		btnRaiz.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 
 		// JButton btnDividir = new JButton("/");
 		// btnDividir.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 
 		JButton btnPercentual = new JButton("%");
+		btnPercentual.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				QuatroOperacoes qo = new QuatroOperacoes();
+				valor2 = Double.valueOf(textTela.getText());
+
+				if (operador.equals("*")) {
+					qo.percent(valor1, valor2);
+					String resultado = String.valueOf(qo.percent(valor1, valor2));
+					textTela.setText(resultado);
+				} else {
+					System.out.println("operador desconhecido");
+				}
+			}
+		});
 		btnPercentual.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 
 		JButton btn1x = new JButton("1/x");
@@ -326,6 +352,14 @@ public class FrmCalculadora extends JFrame {
 		btnIgual.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 
 		JButton button_22 = new JButton(",");
+		button_22.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textTela.getText();
+				textExpessao.getText();
+				textTela.setText(textTela.getText()+".");
+				textExpessao.setText(textExpessao.getText()+".");
+			}
+		});
 		button_22.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 
 		textExpessao = new JTextField();
