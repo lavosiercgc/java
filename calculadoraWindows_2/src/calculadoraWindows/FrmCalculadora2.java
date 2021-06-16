@@ -143,7 +143,8 @@ public class FrmCalculadora2 extends JFrame {
 				subtrair = 0;
 				multiplicar = 0;
 				dividir = 0;
-				 valor1 = 0.0; valor2 = 0.0; resultado = 0.0;
+				valor1 = 0.0; valor2 = 0.0; resultado = 0.0;
+				somar = 0; subtrair = 0; multiplicar = 0; dividir = 0;
 			}
 		});
 		btnCE.setFont(new Font("Segoe UI", Font.PLAIN, 11));
@@ -166,7 +167,8 @@ public class FrmCalculadora2 extends JFrame {
 				subtrair = 0;
 				multiplicar = 0;
 				dividir = 0;
-				 valor1 = 0.0; valor2 = 0.0; resultado = 0.0;
+				valor1 = 0.0; valor2 = 0.0; resultado = 0.0;
+				somar = 0; subtrair = 0; multiplicar = 0; dividir = 0;
 			}
 		});
 		btnC.setFont(new Font("Segoe UI", Font.PLAIN, 11));
@@ -226,13 +228,13 @@ public class FrmCalculadora2 extends JFrame {
 					valor2 = Double.valueOf(um);
 					String v2 = String.valueOf(um);
 					textTela.setText("");
-					textTela.setText(v2+textTela.getText());
+					textTela.setText(textTela.getText()+v2);
 					
 				}else {
 				um = 1;
 				valor1= Double.valueOf(um);
 				String v1 = String.valueOf(um);
-				textTela.setText(v1+textTela.getText());
+				textTela.setText(textTela.getText()+v1);
 				}
 			}
 		});
@@ -467,6 +469,33 @@ public class FrmCalculadora2 extends JFrame {
 		btnIgual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				QuatroOperacoes qo = new QuatroOperacoes();
+				if(somar==1){qo.somar(valor1, valor2);
+				resultado=qo.somar(valor1,valor2);
+				String agora = String.valueOf(qo.somar(valor1,valor2));
+				textTela.setText(agora);
+				valor1=resultado;
+				}
+				if(subtrair==1){qo.subtrair(valor1, valor2);
+				resultado=qo.subtrair(valor1,valor2);
+				String agora = String.valueOf(qo.subtrair(valor1,valor2));
+				textTela.setText(agora);
+				valor1=resultado;
+				}
+				if(multiplicar==1){qo.multiplicar(valor1, valor2);
+				resultado=qo.multiplicar(valor1,valor2);
+				String agora = String.valueOf(qo.multiplicar(valor1,valor2));
+				textTela.setText(agora);
+				valor1=resultado;
+				}
+				if(dividir==1){qo.dividir(valor1, valor2);
+				resultado=qo.dividir(valor1,valor2);
+				String agora = String.valueOf(qo.dividir(valor1,valor2));
+				textTela.setText(agora);
+				valor1=resultado;
+				}
+				
+				
+				
 				um = 1;
 				dois = 2;
 				tres = 3;
@@ -480,7 +509,8 @@ public class FrmCalculadora2 extends JFrame {
 				subtrair = 0;
 				multiplicar = 0;
 				dividir = 0;
-				 valor1 = 0.0; valor2 = 0.0; resultado = 0.0;
+				valor1 = 0.0; valor2 = 0.0; resultado = 0.0;
+				somar = 0; subtrair = 0; multiplicar = 0; dividir = 0;
 
 			}
 		});
