@@ -27,8 +27,10 @@ import javax.swing.border.EmptyBorder;
  */
 
 public class FrmCalculadora2 extends JFrame {
+	
+	String mc, mr, ms, mMais, mMenos;
 	Integer somar = 0, subtrair = 0, multiplicar = 0, dividir = 0;
-	Double zero, um, dois, tres, quatro, cinco, seis, sete, oito, nove;
+	Integer zero, um, dois, tres, quatro, cinco, seis, sete, oito, nove;
 	Double valor1 = 0.0, valor2 = 0.0, resultado = 0.0;
 	String operador;
 
@@ -112,6 +114,12 @@ public class FrmCalculadora2 extends JFrame {
 		btnMemoraiMais.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 
 		JButton btnMemoriaMenos = new JButton("M-");
+		btnMemoriaMenos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mMenos = "-" + textTela.getText();
+				System.out.println(mMenos);
+			}
+		});
 		btnMemoriaMenos.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 
 		JButton btnVoltar = new JButton("<---");
@@ -122,6 +130,20 @@ public class FrmCalculadora2 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				textTela.setText("");
 				textExpressao.setText("");
+				um = 1;
+				dois = 2;
+				tres = 3;
+				quatro = 4;
+				cinco = 5;
+				seis = 6;
+				sete = 7;
+				oito = 8;
+				nove = 9;
+				somar = 0;
+				subtrair = 0;
+				multiplicar = 0;
+				dividir = 0;
+				 valor1 = 0.0; valor2 = 0.0; resultado = 0.0;
 			}
 		});
 		btnCE.setFont(new Font("Segoe UI", Font.PLAIN, 11));
@@ -131,6 +153,20 @@ public class FrmCalculadora2 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				textTela.setText("");
 				textExpressao.setText("");
+				um = 1;
+				dois = 2;
+				tres = 3;
+				quatro = 4;
+				cinco = 5;
+				seis = 6;
+				sete = 7;
+				oito = 8;
+				nove = 9;
+				somar = 0;
+				subtrair = 0;
+				multiplicar = 0;
+				dividir = 0;
+				 valor1 = 0.0; valor2 = 0.0; resultado = 0.0;
 			}
 		});
 		btnC.setFont(new Font("Segoe UI", Font.PLAIN, 11));
@@ -143,11 +179,10 @@ public class FrmCalculadora2 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Double valor1 = Double.valueOf(textTela.getText());
 				Math.sqrt(valor1);
-				String raiz=String.valueOf(Math.sqrt(valor1));
+				String raiz = String.valueOf(Math.sqrt(valor1));
 				textTela.setText(raiz);
-				textExpressao.setText("Sqrt("+valor1+")");
-				
-				
+				textExpressao.setText("Sqrt(" + valor1 + ")");
+
 			}
 		});
 		btnRaiz.setFont(new Font("Segoe UI", Font.PLAIN, 11));
@@ -158,7 +193,7 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btnPercentual = new JButton("%");
 		btnPercentual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				QuatroOperacoes qo = new QuatroOperacoes();
 				valor2 = Double.valueOf(textTela.getText());
 
@@ -166,8 +201,8 @@ public class FrmCalculadora2 extends JFrame {
 					qo.percent(valor1, valor2);
 					String resultado = String.valueOf(qo.percent(valor1, valor2));
 					textTela.setText(resultado);
-				} else{
-					textExpressao.setText("operação Invalida");
+				} else {
+					textExpressao.setText("operaÃ§Ã£o Invalida");
 				}
 			}
 		});
@@ -179,13 +214,7 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btn0 = new JButton("0");
 		btn0.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(textTela.getText().equals("0")){
-					textTela.setText("0");
-				}
-				textTela.setText(textTela.getText() + "0");
-				textExpressao.setText(textExpressao.getText() + "0");
-				zero=0.0;
-				
+				zero = 0;
 			}
 		});
 		btn0.setFont(new Font("Segoe UI", Font.PLAIN, 11));
@@ -193,14 +222,18 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btn1 = new JButton("1");
 		btn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(textTela.getText().equals("0")){
+				if (valor1 > 0) {
+					valor2 = Double.valueOf(um);
+					String v2 = String.valueOf(um);
 					textTela.setText("");
+					textTela.setText(v2+textTela.getText());
+					
+				}else {
+				um = 1;
+				valor1= Double.valueOf(um);
+				String v1 = String.valueOf(um);
+				textTela.setText(v1+textTela.getText());
 				}
-				textTela.setText(textTela.getText() + "1");	
-				textExpressao.setText(textExpressao.getText() + "1");
-				um = 1.0;
-				
-				
 			}
 		});
 		btn1.setFont(new Font("Segoe UI", Font.PLAIN, 11));
@@ -208,13 +241,19 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btn2 = new JButton("2");
 		btn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(textTela.getText().equals("0")){
+				if (valor1 > 0) {
+					valor2 = Double.valueOf(dois);
+					String v2 = String.valueOf(dois);
 					textTela.setText("");
+					textTela.setText(v2+textTela.getText());
+					
+				}else {
+				dois = 2;
+				valor1= Double.valueOf(dois);
+				String v1 = String.valueOf(dois);
+				textTela.setText(v1+textTela.getText());
 				}
-				textTela.setText(textTela.getText() + "2");
-				textExpressao.setText(textExpressao.getText() + "2");
-				dois=2.0;
-				
+	
 			}
 		});
 		btn2.setFont(new Font("Segoe UI", Font.PLAIN, 11));
@@ -222,12 +261,19 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btn3 = new JButton("3");
 		btn3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(textTela.getText().equals("0")){
+				if (valor1 > 0) {
+					valor2 = Double.valueOf(tres);
+					String v2 = String.valueOf(tres);
 					textTela.setText("");
+					textTela.setText(v2+textTela.getText());
+					
+				}else {
+				tres = 3;
+				valor1= Double.valueOf(tres);
+				String v1 = String.valueOf(tres);
+				textTela.setText(v1+textTela.getText());
 				}
-				textTela.setText(textTela.getText() + "3");
-				textExpressao.setText(textExpressao.getText() + "3");
-				tres=3.0;
+
 				
 			}
 		});
@@ -236,13 +282,19 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btn4 = new JButton("4");
 		btn4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(textTela.getText().equals("0")){
+				if (valor1 > 0) {
+					valor2 = Double.valueOf(quatro);
+					String v2 = String.valueOf(quatro);
 					textTela.setText("");
+					textTela.setText(v2+textTela.getText());
+					
+				}else {
+				quatro = 4;
+				valor1= Double.valueOf(quatro);
+				String v1 = String.valueOf(quatro);
+				textTela.setText(v1+textTela.getText());
 				}
-				textTela.setText(textTela.getText() + "4");
-				textExpressao.setText(textExpressao.getText() + "4");
-				quatro=4.0;
-				
+
 			}
 		});
 		btn4.setFont(new Font("Segoe UI", Font.PLAIN, 11));
@@ -250,13 +302,19 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btn5 = new JButton("5");
 		btn5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(textTela.getText().equals("0")){
+				if (valor1 > 0) {
+					valor2 = Double.valueOf(cinco);
+					String v2 = String.valueOf(cinco);
 					textTela.setText("");
+					textTela.setText(v2+textTela.getText());
+					
+				}else {
+				cinco = 5;
+				valor1= Double.valueOf(cinco);
+				String v1 = String.valueOf(cinco);
+				textTela.setText(v1+textTela.getText());
 				}
-				textTela.setText(textTela.getText() + "5");
-				textExpressao.setText(textExpressao.getText() + "5");
-				cinco=5.0;
-				
+
 			}
 		});
 		btn5.setFont(new Font("Segoe UI", Font.PLAIN, 11));
@@ -264,13 +322,19 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btn6 = new JButton("6");
 		btn6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(textTela.getText().equals("0")){
+				if (valor1 > 0) {
+					valor2 = Double.valueOf(seis);
+					String v2 = String.valueOf(seis);
 					textTela.setText("");
+					textTela.setText(v2+textTela.getText());
+					
+				}else {
+				seis = 6;
+				valor1= Double.valueOf(seis);
+				String v1 = String.valueOf(seis);
+				textTela.setText(v1+textTela.getText());
 				}
-				textTela.setText(textTela.getText() + "6");
-				textExpressao.setText(textExpressao.getText() + "6");
-				seis=6.0;
-				
+
 			}
 		});
 		btn6.setFont(new Font("Segoe UI", Font.PLAIN, 11));
@@ -278,13 +342,19 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btn7 = new JButton("7");
 		btn7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(textTela.getText().equals("0")){
+				if (valor1 > 0) {
+					valor2 = Double.valueOf(sete);
+					String v2 = String.valueOf(sete);
 					textTela.setText("");
+					textTela.setText(v2+textTela.getText());
+					
+				}else {
+				sete = 7;
+				valor1= Double.valueOf(sete);
+				String v1 = String.valueOf(sete);
+				textTela.setText(v1+textTela.getText());
 				}
-				textTela.setText(textTela.getText() + "7");
-				textExpressao.setText(textExpressao.getText() + "7");
-				sete=7.0;
-				
+
 			}
 		});
 		btn7.setFont(new Font("Segoe UI", Font.PLAIN, 11));
@@ -292,13 +362,19 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btn8 = new JButton("8");
 		btn8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(textTela.getText().equals("0")){
+				if (valor1 > 0) {
+					valor2 = Double.valueOf(oito);
+					String v2 = String.valueOf(oito);
 					textTela.setText("");
+					textTela.setText(v2+textTela.getText());
+					
+				}else {
+				oito = 8;
+				valor1= Double.valueOf(oito);
+				String v1 = String.valueOf(oito);
+				textTela.setText(v1+textTela.getText());
 				}
-				textTela.setText(textTela.getText() + "8");
-				textExpressao.setText(textExpressao.getText() + "8");
-				oito=8.0;
-				
+
 			}
 		});
 		btn8.setFont(new Font("Segoe UI", Font.PLAIN, 11));
@@ -306,14 +382,19 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btn9 = new JButton("9");
 		btn9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(textTela.getText().equals("0")){
+				if (valor1 > 0) {
+					valor2 = Double.valueOf(nove);
+					String v2 = String.valueOf(nove);
 					textTela.setText("");
+					textTela.setText(v2+textTela.getText());
+					
+				}else {
+				nove = 9;
+				valor1= Double.valueOf(nove);
+				String v1 = String.valueOf(nove);
+				textTela.setText(v1+textTela.getText());
 				}
-				textTela.setText(textTela.getText() + "9");
-				textExpressao.setText(textExpressao.getText() + "9");
-				nove=9.0;
-				
-				
+
 			}
 		});
 		btn9.setFont(new Font("Segoe UI", Font.PLAIN, 11));
@@ -321,12 +402,14 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btnDividir = new JButton("/");
 		btnDividir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textExpressao.setText(textTela.getText() + "/");
-				valor1 = Double.valueOf(textTela.getText());
-				textTela.setText("");
-				textTela.setText("/");
-				operador = textTela.getText();
-				textTela.setText("");
+				if(valor2>0 && valor1>0) {
+					qo.dividir(valor1,valor2);
+					resultado=qo.dividir(valor1,valor2);
+					String agora = String.valueOf(qo.dividir(valor1,valor2));
+					textTela.setText(agora);
+					valor1=resultado;
+				}
+
 				dividir = 1;
 			}
 		});
@@ -335,12 +418,14 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btnVezes = new JButton("*");
 		btnVezes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textExpressao.setText(textTela.getText() + "*");
-				valor1 = Double.valueOf(textTela.getText());
-				textTela.setText("");
-				textTela.setText("*");
-				operador = textTela.getText();
-				textTela.setText("");
+				if(valor2>0 && valor1>0) {
+					qo.multiplicar(valor1,valor2);
+					resultado=qo.multiplicar(valor1,valor2);
+					String agora = String.valueOf(qo.multiplicar(valor1,valor2));
+					textTela.setText(agora);
+					valor1=resultado;
+				}
+
 				multiplicar = 1;
 			}
 		});
@@ -349,12 +434,14 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btnMenos = new JButton("-");
 		btnMenos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textExpressao.setText(textTela.getText() + "-");
-				valor1 = Double.valueOf(textTela.getText());
-				textTela.setText("");
-				textTela.setText("-");
-				operador = textTela.getText();
-				textTela.setText("");
+				if(valor2>0 && valor1>0) {
+					qo.subtrair(valor1,valor2);
+					resultado=qo.subtrair(valor1,valor2);
+					String agora = String.valueOf(qo.subtrair(valor1,valor2));
+					textTela.setText(agora);
+					valor1=resultado;
+				}
+
 				subtrair = 1;
 			}
 		});
@@ -363,15 +450,15 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btnMais = new JButton("+");
 		btnMais.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-	
-				textExpressao.setText(textTela.getText() + "+");
-				valor1 = Double.valueOf(textTela.getText());
-				textTela.setText("");
-				textTela.setText("+");
-				operador = textTela.getText();
-				textTela.setText("");
+				if(valor2>0 && valor1>0) {
+					qo.somar(valor1,valor2);
+					resultado=qo.somar(valor1,valor2);
+					String agora = String.valueOf(qo.somar(valor1,valor2));
+					textTela.setText(agora);
+					valor1=resultado;
+				}
 				somar = 1;
-
+				
 			}
 		});
 		btnMais.setFont(new Font("Segoe UI", Font.PLAIN, 11));
@@ -379,32 +466,21 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btnIgual = new JButton("=");
 		btnIgual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				QuatroOperacoes qo = new QuatroOperacoes();
-				valor2 = Double.valueOf(textTela.getText());
-
-				if (operador.equals("+")) {
-					qo.somar(valor1, valor2);
-					String resultado = String.valueOf(qo.somar(valor1, valor2));
-					textTela.setText(resultado);
-
-				} else if (operador.equals("-")) {
-					qo.subtrair(valor1, valor2);
-					String resultado = String.valueOf(qo.subtrair(valor1, valor2));
-					textTela.setText(resultado);
-				} else if (operador.equals("*")) {
-					qo.multiplicar(valor1, valor2);
-					String resultado = String.valueOf(qo.multiplicar(valor1, valor2));
-					textTela.setText(resultado);
-				} else if (operador.equals("/")) {
-					qo.dividir(valor1, valor2);
-					String resultado = String.valueOf(qo.dividir(valor1, valor2));
-					textTela.setText(resultado);
-				} else {
-					System.out.println("operador desconhecido");
-				}if(dois==2){
-					System.out.println("agora foi");
-					}um=0.0;dois=0.0;tres=0.0;quatro=0.0;cinco=0.0;seis=0.0;sete=0.0;oito=0.0;nove=0.0;
+				um = 1;
+				dois = 2;
+				tres = 3;
+				quatro = 4;
+				cinco = 5;
+				seis = 6;
+				sete = 7;
+				oito = 8;
+				nove = 9;
+				somar = 0;
+				subtrair = 0;
+				multiplicar = 0;
+				dividir = 0;
+				 valor1 = 0.0; valor2 = 0.0; resultado = 0.0;
 
 			}
 		});
@@ -413,13 +489,7 @@ public class FrmCalculadora2 extends JFrame {
 		JButton button_22 = new JButton(",");
 		button_22.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(textTela.getText().equals(".")){
-					textTela.setText("");
-				}
-				textTela.getText();
-				textExpressao.getText();
-				textTela.setText(textTela.getText()+".");
-				textExpressao.setText(textExpressao.getText()+".");
+
 			}
 		});
 		button_22.setFont(new Font("Segoe UI", Font.PLAIN, 11));
@@ -436,154 +506,113 @@ public class FrmCalculadora2 extends JFrame {
 		textExpressao.setColumns(20);
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-				gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane.createSequentialGroup()
-						.addContainerGap().addGroup(gl_contentPane
-								.createParallelGroup(
-										Alignment.LEADING)
-								.addGroup(Alignment.TRAILING,
-										gl_contentPane.createSequentialGroup()
-												.addComponent(btnMc, GroupLayout.PREFERRED_SIZE, 59,
-														GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(btnMr, GroupLayout.PREFERRED_SIZE, 59,
-														GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.UNRELATED)
-												.addComponent(btnMs, GroupLayout.PREFERRED_SIZE, 59,
-														GroupLayout.PREFERRED_SIZE)
-												.addGap(14)
-												.addComponent(btnMemoraiMais, GroupLayout.PREFERRED_SIZE, 59,
-														GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-												.addComponent(btnMemoriaMenos, GroupLayout.PREFERRED_SIZE, 59,
-														GroupLayout.PREFERRED_SIZE))
-								.addGroup(Alignment.TRAILING,
-										gl_contentPane.createSequentialGroup()
-												.addComponent(btnVoltar, GroupLayout.PREFERRED_SIZE, 59,
-														GroupLayout.PREFERRED_SIZE)
-												.addGap(6)
-												.addComponent(btnCE, GroupLayout.PREFERRED_SIZE, 59,
-														GroupLayout.PREFERRED_SIZE)
-												.addGap(10)
-												.addComponent(btnC, GroupLayout.PREFERRED_SIZE, 59,
-														GroupLayout.PREFERRED_SIZE)
-												.addGap(14)
-												.addComponent(btnMaiMenos, GroupLayout.PREFERRED_SIZE, 59,
-														GroupLayout.PREFERRED_SIZE)
-												.addGap(11).addComponent(btnRaiz, GroupLayout.PREFERRED_SIZE, 59,
-														GroupLayout.PREFERRED_SIZE))
-								.addGroup(Alignment.TRAILING,
-										gl_contentPane.createSequentialGroup()
-												.addComponent(btn7, GroupLayout.PREFERRED_SIZE, 59,
-														GroupLayout.PREFERRED_SIZE)
-												.addGap(6)
-												.addComponent(btn8, GroupLayout.PREFERRED_SIZE, 59,
-														GroupLayout.PREFERRED_SIZE)
-												.addGap(10)
-												.addComponent(btn9, GroupLayout.PREFERRED_SIZE, 59,
-														GroupLayout.PREFERRED_SIZE)
-												.addGap(14)
-												.addComponent(btnDividir, GroupLayout.PREFERRED_SIZE, 59,
-														GroupLayout.PREFERRED_SIZE)
-												.addGap(11).addComponent(btnPercentual, GroupLayout.PREFERRED_SIZE, 59,
-														GroupLayout.PREFERRED_SIZE))
-								.addGroup(Alignment.TRAILING,
-										gl_contentPane.createSequentialGroup()
-												.addComponent(btn4, GroupLayout.PREFERRED_SIZE, 59,
-														GroupLayout.PREFERRED_SIZE)
-												.addGap(6)
-												.addComponent(btn5, GroupLayout.PREFERRED_SIZE, 59,
-														GroupLayout.PREFERRED_SIZE)
-												.addGap(10)
-												.addComponent(btn6, GroupLayout.PREFERRED_SIZE, 59,
-														GroupLayout.PREFERRED_SIZE)
-												.addGap(14)
-												.addComponent(btnVezes, GroupLayout.PREFERRED_SIZE, 59,
-														GroupLayout.PREFERRED_SIZE)
-												.addGap(11).addComponent(btn1x, GroupLayout.PREFERRED_SIZE, 59,
-														GroupLayout.PREFERRED_SIZE))
-								.addGroup(Alignment.TRAILING,
-										gl_contentPane.createSequentialGroup()
-												.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-														.addGroup(gl_contentPane.createSequentialGroup()
-																.addComponent(btn1, GroupLayout.PREFERRED_SIZE, 59,
-																		GroupLayout.PREFERRED_SIZE)
-																.addGap(6)
-																.addComponent(btn2, GroupLayout.PREFERRED_SIZE, 59,
-																		GroupLayout.PREFERRED_SIZE)
-																.addGap(10)
-																.addComponent(btn3, GroupLayout.PREFERRED_SIZE, 59,
-																		GroupLayout.PREFERRED_SIZE)
-																.addGap(14).addComponent(btnMenos,
-																		GroupLayout.PREFERRED_SIZE, 59,
-																		GroupLayout.PREFERRED_SIZE))
-														.addGroup(gl_contentPane.createSequentialGroup()
-																.addComponent(btn0, GroupLayout.PREFERRED_SIZE, 124,
-																		GroupLayout.PREFERRED_SIZE)
-																.addPreferredGap(ComponentPlacement.UNRELATED)
-																.addComponent(button_22, GroupLayout.PREFERRED_SIZE, 59,
-																		GroupLayout.PREFERRED_SIZE)
-																.addGap(14).addComponent(btnMais,
-																		GroupLayout.PREFERRED_SIZE, 59,
-																		GroupLayout.PREFERRED_SIZE)))
-												.addGap(11).addComponent(btnIgual, GroupLayout.PREFERRED_SIZE, 59,
-														GroupLayout.PREFERRED_SIZE))
-								.addComponent(textExpressao, GroupLayout.PREFERRED_SIZE, 336, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textTela, GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE))
-						.addContainerGap()));
-		gl_contentPane
-				.setVerticalGroup(
-						gl_contentPane
-								.createParallelGroup(
-										Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup().addContainerGap()
-										.addComponent(textExpressao, GroupLayout.PREFERRED_SIZE, 33,
+		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
+				.createSequentialGroup().addContainerGap()
+				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+								.addComponent(btnMc, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(btnMr, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(btnMs, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+								.addGap(14)
+								.addComponent(btnMemoraiMais, GroupLayout.PREFERRED_SIZE, 59,
+										GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED, 11, Short.MAX_VALUE).addComponent(
+										btnMemoriaMenos, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+								.addComponent(btnVoltar, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+								.addGap(6)
+								.addComponent(btnCE, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+								.addGap(10)
+								.addComponent(btnC, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+								.addGap(14)
+								.addComponent(btnMaiMenos, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+								.addGap(11)
+								.addComponent(btnRaiz, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.TRAILING,
+								gl_contentPane.createSequentialGroup()
+										.addComponent(btn7, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+										.addGap(6)
+										.addComponent(btn8, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+										.addGap(10)
+										.addComponent(btn9, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+										.addGap(14)
+										.addComponent(btnDividir, GroupLayout.PREFERRED_SIZE, 59,
 												GroupLayout.PREFERRED_SIZE)
-										.addGap(1)
-										.addComponent(textTela, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										.addGap(11).addComponent(btnPercentual, GroupLayout.PREFERRED_SIZE, 59,
+												GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.TRAILING,
+								gl_contentPane.createSequentialGroup()
+										.addComponent(btn4, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+										.addGap(6)
+										.addComponent(btn5, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+										.addGap(10)
+										.addComponent(btn6, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+										.addGap(14)
+										.addComponent(btnVezes, GroupLayout.PREFERRED_SIZE, 59,
 												GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.UNRELATED)
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-												.addComponent(btnMc).addComponent(btnMemoriaMenos)
-												.addComponent(btnMemoraiMais).addComponent(btnMr).addComponent(btnMs))
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-												.addComponent(btnVoltar).addComponent(btnCE).addComponent(btnC)
-												.addComponent(btnMaiMenos).addComponent(btnRaiz))
-										.addPreferredGap(ComponentPlacement.UNRELATED)
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-												.addComponent(btn7).addComponent(btn8).addComponent(btn9)
-												.addComponent(btnDividir).addComponent(btnPercentual))
-										.addPreferredGap(ComponentPlacement.UNRELATED)
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-												.addComponent(btn4).addComponent(btn5).addComponent(btn6)
-												.addComponent(btnVezes).addComponent(btn1x))
-										.addPreferredGap(ComponentPlacement.UNRELATED)
-										.addGroup(
-												gl_contentPane
-														.createParallelGroup(Alignment.LEADING,
-																false)
-														.addGroup(
-																gl_contentPane.createSequentialGroup()
-																		.addGroup(
-																				gl_contentPane
-																						.createParallelGroup(
-																								Alignment.LEADING)
-																						.addComponent(btn1)
-																						.addComponent(btn2)
-																						.addComponent(btn3)
-																						.addComponent(btnMenos))
-																		.addPreferredGap(ComponentPlacement.UNRELATED)
-																		.addGroup(
-																				gl_contentPane
-																						.createParallelGroup(
-																								Alignment.LEADING)
-																						.addComponent(button_22)
-																						.addComponent(btnMais)
-																						.addComponent(btn0)))
-														.addComponent(btnIgual, GroupLayout.DEFAULT_SIZE,
-																GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-										.addContainerGap(13, Short.MAX_VALUE)));
+										.addGap(11).addComponent(btn1x, GroupLayout.PREFERRED_SIZE, 59,
+												GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.TRAILING,
+								gl_contentPane.createSequentialGroup()
+										.addGroup(gl_contentPane
+												.createParallelGroup(
+														Alignment.TRAILING)
+												.addGroup(gl_contentPane.createSequentialGroup()
+														.addComponent(btn1, GroupLayout.PREFERRED_SIZE, 59,
+																GroupLayout.PREFERRED_SIZE)
+														.addGap(6)
+														.addComponent(btn2, GroupLayout.PREFERRED_SIZE, 59,
+																GroupLayout.PREFERRED_SIZE)
+														.addGap(10)
+														.addComponent(btn3, GroupLayout.PREFERRED_SIZE, 59,
+																GroupLayout.PREFERRED_SIZE)
+														.addGap(14)
+														.addComponent(
+																btnMenos, GroupLayout.PREFERRED_SIZE, 59,
+																GroupLayout.PREFERRED_SIZE))
+												.addGroup(gl_contentPane.createSequentialGroup()
+														.addComponent(btn0, GroupLayout.PREFERRED_SIZE, 124,
+																GroupLayout.PREFERRED_SIZE)
+														.addPreferredGap(ComponentPlacement.UNRELATED)
+														.addComponent(button_22, GroupLayout.PREFERRED_SIZE, 59,
+																GroupLayout.PREFERRED_SIZE)
+														.addGap(14).addComponent(btnMais, GroupLayout.PREFERRED_SIZE,
+																59, GroupLayout.PREFERRED_SIZE)))
+										.addGap(11).addComponent(btnIgual, GroupLayout.PREFERRED_SIZE, 59,
+												GroupLayout.PREFERRED_SIZE))
+						.addComponent(textExpressao, GroupLayout.PREFERRED_SIZE, 336, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textTela, GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE))
+				.addContainerGap()));
+		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
+				.createSequentialGroup().addContainerGap()
+				.addComponent(textExpressao, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE).addGap(1)
+				.addComponent(
+						textTela, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addGroup(gl_contentPane
+						.createParallelGroup(Alignment.BASELINE).addComponent(btnMc).addComponent(btnMemoriaMenos)
+						.addComponent(btnMemoraiMais).addComponent(btnMr).addComponent(btnMs))
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addComponent(btnVoltar)
+						.addComponent(btnCE).addComponent(btnC).addComponent(btnMaiMenos).addComponent(btnRaiz))
+				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addComponent(btn7).addComponent(btn8)
+						.addComponent(btn9).addComponent(btnDividir).addComponent(btnPercentual))
+				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addComponent(btn4).addComponent(btn5)
+						.addComponent(btn6).addComponent(btnVezes).addComponent(btn1x))
+				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(gl_contentPane.createSequentialGroup()
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addComponent(btn1)
+										.addComponent(btn2).addComponent(btn3).addComponent(btnMenos))
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addComponent(button_22)
+										.addComponent(btnMais).addComponent(btn0)))
+						.addComponent(btnIgual, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addContainerGap(13, Short.MAX_VALUE)));
 		contentPane.setLayout(gl_contentPane);
 	}
 }
