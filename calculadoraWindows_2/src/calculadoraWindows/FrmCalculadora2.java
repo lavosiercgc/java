@@ -444,6 +444,9 @@ public class FrmCalculadora2 extends JFrame {
 				} else {
 					textExpressao.setText(textExpressao.getText()+textTela.getText()+"/");
 					valor1 = Double.valueOf(textTela.getText());
+					somar = 0;
+					subtrair = 0;
+					multiplicar = 0;
 					dividir = 1;
 					textTela.setText("");
 				}
@@ -495,7 +498,10 @@ public class FrmCalculadora2 extends JFrame {
 				} else {
 					textExpressao.setText(textExpressao.getText()+textTela.getText()+"*");
 					valor1 = Double.valueOf(textTela.getText());
+					somar = 0;
+					subtrair = 0;
 					multiplicar = 1;
+					dividir = 0;;
 					textTela.setText("");
 				}
 			}
@@ -546,7 +552,10 @@ public class FrmCalculadora2 extends JFrame {
 				} else {
 					textExpressao.setText(textExpressao.getText()+textTela.getText()+"-");
 					valor1 = Double.valueOf(textTela.getText());
+					somar = 0;
 					subtrair = 1;
+					multiplicar = 0;
+					dividir = 0;
 					textTela.setText("");
 				}
 			}
@@ -556,7 +565,7 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btnMais = new JButton("+");
 		btnMais.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				equal=0;
+				
 				if (valor1 > 0.0 && valor2==0) {
 					valor2 = Double.valueOf(textTela.getText());
 					
@@ -566,7 +575,7 @@ public class FrmCalculadora2 extends JFrame {
 					String agora = String.valueOf(qo.somar(valor1,valor2));
 					textExpressao.setText(textExpressao.getText()+textTela.getText()+"+");
 					textTela.setText(agora);
-					valor1=resultado;
+					valor1=0.0;
 					valor2=0.0;
 					}
 					if(subtrair==1){qo.subtrair(valor1, valor2);
@@ -599,6 +608,9 @@ public class FrmCalculadora2 extends JFrame {
 					textExpressao.setText(textExpressao.getText()+textTela.getText()+"+");
 					valor1 = Double.valueOf(textTela.getText());
 					somar = 1;
+					subtrair = 0;
+					multiplicar = 0;
+					dividir = 0;
 					textTela.setText("");
 				}
 				
