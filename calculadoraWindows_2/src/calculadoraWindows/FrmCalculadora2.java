@@ -9,6 +9,7 @@ import java.util.Scanner;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -19,10 +20,18 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
+
+import org.w3c.dom.events.Event;
+
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.text.ParseException;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 /**
  * 
@@ -32,11 +41,13 @@ import java.awt.event.KeyEvent;
 
 public class FrmCalculadora2 extends JFrame {
 	
+
 	String mc, mr, ms, mMais, mMenos;
 	Integer somar = 0, subtrair = 0, multiplicar = 0, dividir = 0, igual=1, equal=1;
 	Integer zero, um, dois, tres, quatro, cinco, seis, sete, oito, nove;
 	Double valor1 = 0.0, valor2 = 0.0, resultado = 0.0;
 	String operador;
+	String e;
 
 	QuatroOperacoes qo = new QuatroOperacoes();
 	Scanner sc = new Scanner(System.in);
@@ -47,8 +58,10 @@ public class FrmCalculadora2 extends JFrame {
 	String valorIgual;
 	private JTextField textExpressao;
 
-	public static void main(String[] args)
+	public static  void main(String[] args)
 			throws ClassNotFoundException, InstantiationException, UnsupportedLookAndFeelException {
+		avaliador a = new avaliador();
+		
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 
@@ -66,9 +79,10 @@ public class FrmCalculadora2 extends JFrame {
 				}
 			}
 		});
+		
 	}
 
-	public FrmCalculadora2() {
+	public FrmCalculadora2() throws ParseException {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(FrmCalculadora2.class.getResource("/javax/swing/plaf/metal/icons/ocean/question.png")));
 		setTitle("Calculadora");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -93,36 +107,47 @@ public class FrmCalculadora2 extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
-		textTela = new JTextField();
+		textTela = new JFormattedTextField();		
+		igual = 1;
+		textTela.setText("");
 		textTela.setBackground(new Color(224, 255, 255));
-		textTela.setEditable(false);
-		textTela.requestFocus();
+		textTela.setEditable(true);
 		textTela.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-
+				
 			}
 		});
 		textTela.setHorizontalAlignment(SwingConstants.RIGHT);
 		textTela.setFocusable(isFocusable());
+		this.requestFocus();
 		textTela.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		textTela.setColumns(20);
+		textTela.setColumns(10);
 
 		JButton btnMc = new JButton("MC");
+		btnMc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				textTela.setText("");
+			}
+		});
 		btnMc.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 
 		JButton btnMr = new JButton("MR");
+		textTela.requestFocus(true);
 		btnMr.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 
 		JButton btnMs = new JButton("MS");
+		textTela.requestFocus(true);
 		btnMs.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 
 		JButton btnMemoraiMais = new JButton("M+");
+		textTela.requestFocus(true);
 		btnMemoraiMais.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 
 		JButton btnMemoriaMenos = new JButton("M-");
 		btnMemoriaMenos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textTela.requestFocus(true);
 				mMenos = "-" + textTela.getText();
 				System.out.println(mMenos);
 			}
@@ -152,6 +177,7 @@ public class FrmCalculadora2 extends JFrame {
 				dividir = 0;
 				valor1 = 0.0; valor2 = 0.0; resultado = 0.0;
 				somar = 0; subtrair = 0; multiplicar = 0; dividir = 0;
+				textTela.requestFocus(true);
 			}
 		});
 		btnCE.setFont(new Font("Segoe UI", Font.PLAIN, 11));
@@ -176,6 +202,7 @@ public class FrmCalculadora2 extends JFrame {
 				dividir = 0;
 				valor1 = 0.0; valor2 = 0.0; resultado = 0.0;
 				somar = 0; subtrair = 0; multiplicar = 0; dividir = 0;
+				textTela.requestFocus(true);
 			}
 		});
 		btnC.setFont(new Font("Segoe UI", Font.PLAIN, 11));
@@ -186,6 +213,7 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btnRaiz = new JButton("V'''");
 		btnRaiz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textTela.requestFocus(true);
 				Double valor1 = Double.valueOf(textTela.getText());
 				Math.sqrt(valor1);
 				String raiz = String.valueOf(Math.sqrt(valor1));
@@ -195,6 +223,7 @@ public class FrmCalculadora2 extends JFrame {
 			}
 		});
 		btnRaiz.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+		textTela.requestFocus(true);
 
 		// JButton btnDividir = new JButton("/");
 		// btnDividir.setFont(new Font("Segoe UI", Font.PLAIN, 11));
@@ -202,6 +231,7 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btnPercentual = new JButton("%");
 		btnPercentual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textTela.requestFocus(true);
 
 				QuatroOperacoes qo = new QuatroOperacoes();
 				valor2 = Double.valueOf(textTela.getText());
@@ -227,6 +257,7 @@ public class FrmCalculadora2 extends JFrame {
 		btn0.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
+				textTela.requestFocus(true);
 				int keyCode = e.getKeyCode();
 		        if (keyCode == KeyEvent.VK_NUMPAD0){
 		        	
@@ -240,6 +271,7 @@ public class FrmCalculadora2 extends JFrame {
 		});
 		btn0.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textTela.requestFocus(true);
 				
 				if(igual == 0){
 					textTela.setText("");
@@ -256,6 +288,7 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btn1 = new JButton("1");
 		btn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textTela.requestFocus(true);
 				
 				if(igual == 0){
 					textTela.setText("");
@@ -274,6 +307,7 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btn2 = new JButton("2");
 		btn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textTela.requestFocus(true);
 				if(igual == 0){
 					textTela.setText("");
 				}
@@ -292,6 +326,7 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btn3 = new JButton("3");
 		btn3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textTela.requestFocus(true);
 				if(igual == 0){
 					textTela.setText("");
 				}
@@ -309,6 +344,7 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btn4 = new JButton("4");
 		btn4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textTela.requestFocus(true);
 				if(igual == 0){
 					textTela.setText("");
 				}
@@ -324,6 +360,7 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btn5 = new JButton("5");
 		btn5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textTela.requestFocus(true);
 				if(igual == 0){
 					textTela.setText("");
 				}
@@ -340,6 +377,7 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btn6 = new JButton("6");
 		btn6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textTela.requestFocus(true);
 				if(igual == 0){
 					textTela.setText("");
 				}
@@ -356,6 +394,7 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btn7 = new JButton("7");
 		btn7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textTela.requestFocus(true);
 				if(igual == 0){
 					textTela.setText("");
 				}
@@ -403,6 +442,7 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btnDividir = new JButton("/");
 		btnDividir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textTela.requestFocus(true);
 				equal=0;
 				if (valor1 > 0.0 && valor2==0) {
 					valor2 = Double.valueOf(textTela.getText());
@@ -457,6 +497,7 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btnVezes = new JButton("*");
 		btnVezes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textTela.requestFocus(true);
 				equal=0;
 				if (valor1 > 0.0 && valor2==0) {
 					valor2 = Double.valueOf(textTela.getText());
@@ -511,6 +552,7 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btnMenos = new JButton("-");
 		btnMenos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textTela.requestFocus(true);
 				equal=0;
 				if (valor1 > 0.0 && valor2==0) {
 					valor2 = Double.valueOf(textTela.getText());
@@ -565,6 +607,7 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btnMais = new JButton("+");
 		btnMais.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				textTela.requestFocus(true);
 				
 				if (valor1 > 0.0 && valor2==0) {
 					valor2 = Double.valueOf(textTela.getText());
@@ -612,6 +655,7 @@ public class FrmCalculadora2 extends JFrame {
 					multiplicar = 0;
 					dividir = 0;
 					textTela.setText("");
+					textTela.requestFocus(true);
 				}
 				
 			}
@@ -667,7 +711,7 @@ public class FrmCalculadora2 extends JFrame {
 				dividir = 0;
 				valor1 = 0.0; valor2 = 0.0; resultado = 0.0;
 				igual = 0;
-				
+				textTela.requestFocus(true);
 
 			}
 		});
@@ -676,20 +720,24 @@ public class FrmCalculadora2 extends JFrame {
 		JButton button_22 = new JButton(",");
 		button_22.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textTela.requestFocus(true);
 
 			}
 		});
 		button_22.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 
 		textExpressao = new JTextField();
+		textTela.requestFocus(true);
 		textExpressao.setBackground(new Color(224, 255, 255));
 		textExpressao.setEditable(false);
 		textExpressao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textTela.requestFocus(true);
 
 			}
 		});
 		textExpressao.setHorizontalAlignment(SwingConstants.RIGHT);
+		textExpressao.setFocusable(false);
 		textExpressao.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		textExpressao.setColumns(20);
 
@@ -803,4 +851,5 @@ public class FrmCalculadora2 extends JFrame {
 				.addContainerGap(13, Short.MAX_VALUE)));
 		contentPane.setLayout(gl_contentPane);
 	}
+
 }
