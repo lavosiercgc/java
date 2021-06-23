@@ -1,9 +1,14 @@
 package calculadoraWindows;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.text.ParseException;
 import java.util.Scanner;
 
 import javax.script.ScriptException;
@@ -21,19 +26,6 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.MaskFormatter;
-
-import org.w3c.dom.events.Event;
-
-import java.awt.Color;
-import java.awt.Toolkit;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 
 /**
  * 
@@ -61,7 +53,6 @@ public class FrmCalculadora2 extends JFrame {
 
 	public static void main(String[] args)
 			throws ClassNotFoundException, InstantiationException, UnsupportedLookAndFeelException {
-		avaliador a = new avaliador();
 
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -125,21 +116,6 @@ public class FrmCalculadora2 extends JFrame {
 		textTela.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		textTela.setColumns(20);
 		// Formatando para so numeros
-		textTela.addKeyListener(new java.awt.event.KeyAdapter() {
-			public void keyPressed(java.awt.event.KeyEvent evt) {
-				if (evt.getKeyCode() == KeyEvent.VK_A) {
-					int a = avaliador.eliminador(textTela.getText());
-					if (a == 0) {
-						a = KeyEvent.VK_BACK_SPACE;
-						System.out.println(a);
-						System.out.println(a);
-
-						// System.exit(0);
-
-					}
-				}
-			}
-		});
 
 		// Formatando para so numeros fim.
 
@@ -701,14 +677,12 @@ public class FrmCalculadora2 extends JFrame {
 		JButton btnIgual = new JButton("=");
 		btnIgual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (1 == 1) {
-					try {
-						qo.calculaExpressao(textTela.getText());
-						textTela.setText((String) (qo.calculaExpressao(textTela.getText())));
-					} catch (ScriptException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+
+				try {
+					qo.calculaExpressao(textTela.getText());
+					textTela.setText((String) (qo.calculaExpressao(textTela.getText())));
+				} catch (ScriptException e1) {
+					e1.printStackTrace();
 				}
 
 				valor2 = Double.valueOf(textTela.getText());
